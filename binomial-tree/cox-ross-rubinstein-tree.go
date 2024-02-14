@@ -14,6 +14,7 @@ type CoxRossRubinsteinTree struct {
 	Dividend         float64
 	N                int
 	timeToExpiration float64
+	Delta            float64
 }
 
 func (c *CoxRossRubinsteinTree) SetVolatility(sigma float64) {
@@ -59,6 +60,11 @@ func (c *CoxRossRubinsteinTree) Put() float64 {
 				p[i] = exercise
 			}
 		}
+
+		// grab aproximation for delta
+		if j == 1 {
+			c.Delta = (p[0] - p[1]) / (c.Underlying/up - c.Underlying*up)
+		}
 	}
 
 	if math.IsNaN(p[0]) {
@@ -90,6 +96,11 @@ func (c *CoxRossRubinsteinTree) Call() float64 {
 			if C[i] < exercise {
 				C[i] = exercise
 			}
+		}
+
+		// grab aproximation for delta
+		if j == 1 {
+			c.Delta = (C[1] - C[0]) / (c.Underlying*up - c.Underlying/up)
 		}
 	}
 
