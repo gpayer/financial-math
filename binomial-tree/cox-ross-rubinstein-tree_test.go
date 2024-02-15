@@ -36,9 +36,9 @@ func TestDelta2(t *testing.T) {
 	coxtree.Init(100, 1, 1, 0.01, 0.00, 0.00)
 	coxtree.Calc()
 	_ = coxtree.Put()
-	a.Greater(0.005, math.Abs(-1-coxtree.Delta))
+	a.Equal(0.0, coxtree.Delta)
 	_ = coxtree.Call()
-	a.Greater(0.005, math.Abs(0-coxtree.Delta))
+	a.Greater(0.005, math.Abs(1.0-coxtree.Delta))
 }
 
 func TestDelta3(t *testing.T) {
@@ -47,7 +47,7 @@ func TestDelta3(t *testing.T) {
 	coxtree.Init(100, 200, 1, 0.01, 0.00, 0.00)
 	coxtree.Calc()
 	_ = coxtree.Put()
-	a.Greater(0.005, math.Abs(0-coxtree.Delta))
+	a.Equal(-1.0, coxtree.Delta)
 	_ = coxtree.Call()
-	a.Greater(0.005, math.Abs(1-coxtree.Delta))
+	a.Equal(0.0, coxtree.Delta)
 }

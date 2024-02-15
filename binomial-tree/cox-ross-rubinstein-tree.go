@@ -63,7 +63,7 @@ func (c *CoxRossRubinsteinTree) Put() float64 {
 
 		// grab aproximation for delta
 		if j == 1 {
-			c.Delta = (p[0] - p[1]) / (c.Underlying/up - c.Underlying*up)
+			c.Delta = (p[1] - p[0]) / (c.Underlying*up - c.Underlying/up)
 		}
 	}
 
